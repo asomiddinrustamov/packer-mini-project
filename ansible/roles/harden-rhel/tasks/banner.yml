@@ -1,0 +1,34 @@
+- name: "Ensure message of the day is configured properly"
+  template:
+    src: etc/motd.j2
+    dest: /etc/motd
+  tags:
+    - patch
+
+
+
+- name: "Ensure local login warning banner is configured properly"
+  template:
+    src: etc/issue.j2
+    dest: /etc/issue
+  tags:
+    - patch
+
+
+
+- name: "Ensure remote login warning banner is configured properly"
+  template:
+    src: etc/issue.net.j2
+    dest: /etc/issue.net
+  tags:
+    - patch
+
+- name: "Ensure SSH warning banner is configured"
+  lineinfile:
+    state: present
+    path: /etc/ssh/sshd_config
+    regexp: '^Banner'
+    line: 'Banner /etc/issue.net'
+  notify: restart sshd
+  tags:
+    - patch

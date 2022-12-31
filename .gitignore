@@ -1,0 +1,13 @@
+# VScode workspace files
+workspace.code-workspace
+
+.vscode
+.vscode/
+*.iml
+*.zip
+.DS_Store
+__pycache__/
+venv/
+
+# Crash log files
+crash.log

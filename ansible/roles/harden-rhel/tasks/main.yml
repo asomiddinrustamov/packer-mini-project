@@ -1,0 +1,17 @@
+- import_tasks: packs.yml
+  become: true
+
+- import_tasks: cron.yml
+  become: true
+
+- import_tasks: network.yml
+  become: true
+
+- import_tasks: banner.yml
+  become: true
+
+- import_tasks: permissions.yml
+  become: true
+
+
+

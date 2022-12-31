@@ -1,0 +1,27 @@
+- name: "Ensure xinetd is not installed"
+  yum:
+    name: xinetd
+    state: absent
+  tags:
+    - patch
+
+- name: "Ensure CUPS is not installed"
+  yum:
+    name: cups
+    state: absent
+  tags:
+    - patch
+
+- name: "Ensure DNS Server is not installed"
+  yum:
+    name: bind
+    state: absent
+  tags:
+    - patch
+
+- name: "Ensure FTP Server is not installed"
+  yum:
+    name: vsftpd
+    state: absent
+  tags:
+    - patch

@@ -1,0 +1,28 @@
+- name: "Ensure permissions on /etc/motd are configured"
+  file:
+    dest: /etc/motd
+    state: file
+    owner: root
+    group: root
+    mode: 0644
+  tags:
+    - patch
+
+
+# - name: "Ensure permissions on /etc/passwd are configured"
+#   file:
+#     dest: /etc/passwd
+#     owner: root
+#     group: root
+#     mode: 06441
+#   tags:
+#     - patch
+
+# - name: "Ensure permissions on /etc/group are configured"
+#   file:
+#     dest: /etc/group
+#     owner: root
+#     group: root
+#     mode: 0644
+#   tags:
+#     - patch

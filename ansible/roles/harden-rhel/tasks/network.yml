@@ -1,0 +1,29 @@
+- name: "Disable IPv6"
+  sysctl:
+    name: '{{ item.name }}'
+    value: '{{ item.value }}'
+    sysctl_set: yes
+    state: present
+    reload: yes
+    ignoreerrors: yes
+  with_items:
+    - { name: net.ipv6.conf.all.disable_ipv6, value: 1 }
+    - { name: net.ipv6.conf.default.disable_ipv6, value: 1 }
+  notify:
+    - sysctl flush ipv6 route table
+  tags:
+    - patch
+
+
+- name: "Ensure IP forwarding is disabled | IPv6"
+  sysctl:
+    name: net.ipv6.conf.all.forwarding
+    value: '0'
+    state: present
+    reload: yes
+    ignoreerrors: yes
+    sysctl_set: yes
+  notify:
+    - sysctl flush ipv6 route table
+  tags:
+    - patch

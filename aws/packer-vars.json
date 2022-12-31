@@ -1,0 +1,12 @@
+{
+    "description": "Variables for RHEL AMIs",
+    "ami_owner_acct": "117091474022",
+    "linux_base_ami_name": "RHEL-9.0.0_HVM-20220513-x86_64-0-Hourly2-GP2",
+    "linux_base_ami_owner": "309956199498",
+    "ssh_username": "ec2-user",
+    "linux_build_instance_type": "t3.small",
+    "aws_region": "us-east-1",
+    "ami_regions": "us-east-1",
+    "root_volume_size_Gi": "8",
+    "root_volume_type": "gp2"
+}
