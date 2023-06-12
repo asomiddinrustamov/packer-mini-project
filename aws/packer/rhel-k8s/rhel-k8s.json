@@ -1,0 +1,56 @@
+{
+  "variables": {
+  },
+  "builders": [
+    {
+      "type": "amazon-ebs",
+      "ami_name": "rhel9_k8s",
+      "region": "{{user `aws_region`}}",
+      "ami_regions": ["{{user `ami_regions`}}"],
+      "instance_type": "{{user `linux_build_instance_type`}}",
+      "source_ami_filter": {
+        "filters": {
+          "virtualization-type": "hvm",
+          "name": "{{user `linux_base_ami_name`}}",
+          "root-device-type": "ebs"
+        },
+        "owners": ["{{user `linux_base_ami_owner`}}"],
+        "most_recent": true
+      },
+      "launch_block_device_mappings": [
+        {
+          "device_name": "/dev/xvda",
+          "volume_size": "{{user `root_volume_size_Gi`}}",
+          "volume_type": "{{user `root_volume_type`}}",
+          "delete_on_termination": true
+        }
+      ],
+      "ssh_username": "{{user `ssh_username`}}",
+      "tags": {
+        "Name": "rhel9-k8s-gold",
+        "OS_Version": "RHEL9",
+        "ENV": "TuranCyberHub"
+      }
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "shell",
+      "inline": [
+        "sleep 15"
+      ]
+    },
+    {
+      "type": "shell",
+      "execute_command": "echo 'k8s' | sudo -S sh -c '{{ .Vars }} {{ .Path }}'",
+      "script": "../../../shellscripts/linux/k8s.sh"
+    },
+    {
+      "type": "shell",
+      "inline": [
+        "sudo dnf clean all",
+        "sudo rm -rf /var/cache/dnf"
+      ]
+    }
+  ]
+}
