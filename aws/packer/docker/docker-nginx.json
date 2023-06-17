@@ -1,0 +1,32 @@
+{
+    "builders": [
+      {
+        "type": "docker",
+        "image": "ubuntu:latest",
+        "commit": true
+      }
+    ],
+    "provisioners": [
+      {
+        "type": "shell",
+        "inline": [
+          "apt-get update",
+          "apt-get install -y nginx",
+          "rm -rf /var/lib/apt/lists/*"
+        ]
+      }
+    ],
+    "post-processors": [
+      [
+        {
+          "type": "docker-tag",
+          "repository": "asomiddin21/ubuntu-nginx",
+          "tag": "001"
+        },
+        {
+          "type": "docker-push"
+        }
+      ]
+    ]
+  }  
+  
